@@ -1,10 +1,3 @@
-//
-//  FavoritePresenter.swift
-//  TheMealsApp
-//
-//  Created by Gilang Ramadhan on 22/11/22.
-//
-
 import SwiftUI
 
 class FavoritePresenter: ObservableObject {

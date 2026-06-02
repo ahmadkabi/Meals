@@ -1,10 +1,3 @@
-//
-//  Injection.swift
-//  TheMealsApp
-//
-//  Created by Gilang Ramadhan on 22/11/22.
-//
-
 import Foundation
 import RealmSwift
 
