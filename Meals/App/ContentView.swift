@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
-  @EnvironmentObject var homePresenter: HomePresenter
+  @EnvironmentObject var mealsPresenter: MealsPresenter
+  @EnvironmentObject var favoritePresenter: FavoritePresenter
 
   var body: some View {
     NavigationStack {
-      HomeView(presenter: homePresenter)
+      HomeView(
+        mealsPresenter: mealsPresenter,
+        favoritePresenter: favoritePresenter,
+      )
     }
   }
 }

@@ -9,12 +9,14 @@ import SwiftUI
 
 @main
 struct MealsApp: App {
-  let homePresenter = HomePresenter(homeUseCase: Injection.init().provideHome())
+  let mealsPresenter = MealsPresenter(mealsUseCase: Injection.init().provideMeals())
+  let favoritePresenter = FavoritePresenter(favoriteUseCase: Injection.init().provideFavorite())
 
   var body: some Scene {
     WindowGroup {
       ContentView()
-        .environmentObject(homePresenter)
+        .environmentObject(mealsPresenter)
+        .environmentObject(favoritePresenter)
     }
   }
 }

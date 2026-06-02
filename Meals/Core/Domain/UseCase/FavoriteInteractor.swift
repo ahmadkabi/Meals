@@ -1,5 +1,5 @@
 //
-//  HomeInteractor.swift
+//  FavoriteInteractor.swift
 //  TheMealsApp
 //
 //  Created by Gilang Ramadhan on 22/11/22.
@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol HomeUseCase {
+protocol FavoriteUseCase {
 
   func getCategories(completion: @escaping (Result<[CategoryModel], Error>) -> Void)
 
 }
 
-class HomeInteractor: HomeUseCase {
+class FavoriteInteractor: FavoriteUseCase {
 
   private let repository: MealRepositoryProtocol
 
