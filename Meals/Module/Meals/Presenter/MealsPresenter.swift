@@ -13,9 +13,9 @@ class MealsPresenter: ObservableObject {
     self.mealsUseCase = mealsUseCase
   }
 
-  func getCategories() {
+  func fetchCategories() {
     loadingState = true
-    mealsUseCase.getCategories { result in
+    mealsUseCase.fetchCategories { result in
       switch result {
       case .success(let categories):
         DispatchQueue.main.async {

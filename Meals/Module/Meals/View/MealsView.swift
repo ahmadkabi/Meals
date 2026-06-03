@@ -29,7 +29,7 @@ struct MealsView: View {
             }
         }.onAppear {
             if self.presenter.categories.count == 0 {
-                self.presenter.getCategories()
+                self.presenter.fetchCategories()
             }
         }.navigationBarTitle(
             Text("Meals Apps"),
