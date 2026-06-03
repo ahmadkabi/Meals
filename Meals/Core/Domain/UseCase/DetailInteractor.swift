@@ -6,7 +6,7 @@ protocol DetailUseCase {
     func getCategory() -> CategoryModel
     func isFavorite() -> Bool
     func favoriteCategory(category: CategoryModel) -> AnyPublisher<Bool, Error>
-    func unfavoriteCategory(category: CategoryModel)
+    func unfavoriteCategory(category: CategoryModel) -> AnyPublisher<Bool, Error>
     
 }
 
@@ -36,12 +36,9 @@ class DetailInteractor: DetailUseCase {
             categoryEntity: CategoryMapper.mapCategoryDomainToEntity(input: category)
         )
     }
-
-    func unfavoriteCategory(category: CategoryModel) {
-        repository.unfavoriteCategory(
-            categoryEntity: CategoryMapper.mapCategoryDomainToEntity(input: category)
-        ){ _ in
-        }
+    
+    func unfavoriteCategory(category: CategoryModel) -> AnyPublisher<Bool, Error> {
+        return repository.unfavoriteCategory(id: category.id)
     }
     
 }

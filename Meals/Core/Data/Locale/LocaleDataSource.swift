@@ -5,7 +5,9 @@ import RealmSwift
 protocol LocaleDataSourceProtocol: AnyObject {
     
     func getCategories() -> AnyPublisher<[CategoryEntity], Error>
+    func getCategory(id: String) -> CategoryEntity?
     func addCategory(from category: CategoryEntity) -> AnyPublisher<Bool, Error>
+    func deleteCategory(id: String) -> AnyPublisher<Bool, Error>
     
 }
 
@@ -27,17 +29,17 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
     
     func getCategories() -> AnyPublisher<[CategoryEntity], Error> {
         return Future<[CategoryEntity], Error> { completion in
-          if let realm = self.realm {
-            let categories: Results<CategoryEntity> = {
-              realm.objects(CategoryEntity.self)
-                .sorted(byKeyPath: "title", ascending: true)
-            }()
-            completion(.success(categories.toArray(ofType: CategoryEntity.self)))
-          } else {
-            completion(.failure(DatabaseError.invalidInstance))
-          }
+            if let realm = self.realm {
+                let categories: Results<CategoryEntity> = {
+                    realm.objects(CategoryEntity.self)
+                        .sorted(byKeyPath: "title", ascending: true)
+                }()
+                completion(.success(categories.toArray(ofType: CategoryEntity.self)))
+            } else {
+                completion(.failure(DatabaseError.invalidInstance))
+            }
         }.eraseToAnyPublisher()
-      }
+    }
     
     func getCategory(
         id: String,
@@ -68,32 +70,35 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
         }.eraseToAnyPublisher()
     }
     
+    
     func deleteCategory(
-        id: String,
-        result: @escaping (Result<Bool, DatabaseError>) -> Void
-    ) {
-        guard let realm = realm else {
-            result(.failure(.invalidInstance))
-            return
-        }
-        
-        guard let category = realm.object(
-            ofType: CategoryEntity.self,
-            forPrimaryKey: id
-        ) else {
-            result(.success(false))
-            return
-        }
-        
-        do {
-            try realm.write {
-                realm.delete(category)
+        id: String
+    ) -> AnyPublisher<Bool, Error> {
+        Future<Bool, Error> { completion in
+            guard let realm = self.realm else {
+                completion(.failure(DatabaseError.invalidInstance))
+                return
             }
-            
-            result(.success(true))
-        } catch {
-            result(.failure(.requestFailed))
+
+            guard let category = realm.object(
+                ofType: CategoryEntity.self,
+                forPrimaryKey: id
+            ) else {
+                completion(.success(false))
+                return
+            }
+
+            do {
+                try realm.write {
+                    realm.delete(category)
+                }
+
+                completion(.success(true))
+            } catch {
+                completion(.failure(DatabaseError.requestFailed))
+            }
         }
+        .eraseToAnyPublisher()
     }
     
 }

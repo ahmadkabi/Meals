@@ -6,7 +6,7 @@ protocol MealRepositoryProtocol {
     func fetchCategories() -> AnyPublisher<[CategoryModel], Error>
     func getCategory(id: String) -> CategoryModel?
     func favoriteCategory(categoryEntity: CategoryEntity) -> AnyPublisher<Bool, Error>
-    func unfavoriteCategory(categoryEntity: CategoryEntity, result: @escaping (Result<Bool, DatabaseError>) -> Void)
+    func unfavoriteCategory(id: String) -> AnyPublisher<Bool, Error>
     func getCategories() -> AnyPublisher<[CategoryModel], Error>
     
 }
@@ -43,15 +43,10 @@ extension MealRepository: MealRepositoryProtocol {
         .eraseToAnyPublisher()
     }
     
-    func unfavoriteCategory(categoryEntity: CategoryEntity, result: @escaping (Result<Bool, DatabaseError>) -> Void){
-        locale.deleteCategory(id: categoryEntity.id){ addState in
-            switch addState {
-            case .success(let resultFromAdd):
-                result(.success(resultFromAdd))
-            case .failure(let error):
-                result(.failure(error))
-            }
-        }
+    func unfavoriteCategory(id: String) -> AnyPublisher<Bool, Error>{
+        return self.locale.deleteCategory(id: id)
+        .map { $0 }
+        .eraseToAnyPublisher()
     }
     
     func getCategories() -> AnyPublisher<[CategoryModel], Error> {

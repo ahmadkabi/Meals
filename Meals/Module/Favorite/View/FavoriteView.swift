@@ -28,9 +28,7 @@ struct FavoriteView: View {
         }
       }
     }.onAppear {
-      if self.presenter.categories.count == 0 {
         self.presenter.getCategories()
-      }
     }.navigationBarTitle(
       Text("Meals Apps"),
       displayMode: .automatic

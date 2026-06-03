@@ -24,7 +24,23 @@ class DetailPresenter: ObservableObject {
     func onFavoriteClicked(){
         if(isFavorite){
             detailUseCase.unfavoriteCategory(category: category)
-            isFavorite = !isFavorite
+                .receive(on: RunLoop.main)
+                .sink(
+                    receiveCompletion: { completion in
+                        switch completion {
+                        case .failure:
+                            self.errorMessage = String(describing: completion)
+                        case .finished:
+                            self.loadingState = false
+                        }
+                    },
+                    receiveValue: { isSuccess in
+                        if isSuccess{
+                            self.isFavorite = !self.isFavorite
+                        }
+                    }
+                )
+                .store(in: &cancellables)
         }else{
             detailUseCase.favoriteCategory(category: category)
                 .receive(on: RunLoop.main)
