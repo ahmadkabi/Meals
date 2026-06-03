@@ -1,10 +1,11 @@
 import Foundation
+import Combine
 
 protocol DetailUseCase {
     
     func getCategory() -> CategoryModel
     func isFavorite() -> Bool
-    func favoriteCategory(category: CategoryModel)
+    func favoriteCategory(category: CategoryModel) -> AnyPublisher<Bool, Error>
     func unfavoriteCategory(category: CategoryModel)
     
 }
@@ -30,11 +31,10 @@ class DetailInteractor: DetailUseCase {
         return repository.getCategory(id: category.id) != nil
     }
     
-    func favoriteCategory(category: CategoryModel) {
-        repository.favoriteCategory(
+    func favoriteCategory(category: CategoryModel) -> AnyPublisher<Bool, Error> {
+        return repository.favoriteCategory(
             categoryEntity: CategoryMapper.mapCategoryDomainToEntity(input: category)
-        ){ _ in
-        }
+        )
     }
 
     func unfavoriteCategory(category: CategoryModel) {

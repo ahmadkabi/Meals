@@ -1,12 +1,13 @@
 import Foundation
+import Combine
 
 protocol MealRepositoryProtocol {
     
-    func fetchCategories(result: @escaping (Result<[CategoryModel], Error>) -> Void)
+    func fetchCategories() -> AnyPublisher<[CategoryModel], Error>
     func getCategory(id: String) -> CategoryModel?
-    func favoriteCategory(categoryEntity: CategoryEntity, result: @escaping (Result<Bool, DatabaseError>) -> Void)
+    func favoriteCategory(categoryEntity: CategoryEntity) -> AnyPublisher<Bool, Error>
     func unfavoriteCategory(categoryEntity: CategoryEntity, result: @escaping (Result<Bool, DatabaseError>) -> Void)
-    func getCategories(result: @escaping (Result<[CategoryModel], Error>) -> Void)
+    func getCategories() -> AnyPublisher<[CategoryModel], Error>
     
 }
 
@@ -30,29 +31,16 @@ final class MealRepository: NSObject {
 
 extension MealRepository: MealRepositoryProtocol {
     
-    func fetchCategories(
-        result: @escaping (Result<[CategoryModel], Error>) -> Void
-    ) {
-        remote.getCategories { remoteResponses in
-            switch remoteResponses {
-            case .success(let categoryResponses):
-                let resultList = CategoryMapper.mapCategoryResponsesToDomains(input: categoryResponses)
-                result(.success(resultList))
-            case .failure(let error):
-                result(.failure(error))
-            }
-        }
+    func fetchCategories() -> AnyPublisher<[CategoryModel], Error> {
+        return self.remote.getCategories()
+            .map { CategoryMapper.mapCategoryResponsesToDomains(input: $0) }
+            .eraseToAnyPublisher()
     }
     
-    func favoriteCategory(categoryEntity: CategoryEntity, result: @escaping (Result<Bool, DatabaseError>) -> Void){
-        locale.addCategory(from: categoryEntity){ addState in
-            switch addState {
-            case .success(let resultFromAdd):
-                result(.success(resultFromAdd))
-            case .failure(let error):
-                result(.failure(error))
-            }
-        }
+    func favoriteCategory(categoryEntity: CategoryEntity) -> AnyPublisher<Bool, Error>{
+        return self.locale.addCategory(from: categoryEntity)
+        .map { $0 }
+        .eraseToAnyPublisher()
     }
     
     func unfavoriteCategory(categoryEntity: CategoryEntity, result: @escaping (Result<Bool, DatabaseError>) -> Void){
@@ -66,18 +54,10 @@ extension MealRepository: MealRepositoryProtocol {
         }
     }
     
-    func getCategories(
-        result: @escaping (Result<[CategoryModel], Error>) -> Void
-    ) {
-        locale.getCategories { localeResponses in
-            switch localeResponses {
-            case .success(let categoryEntity):
-                let resultList = CategoryMapper.mapCategoryEntitiesToDomains(input: categoryEntity)
-                result(.success(resultList))
-            case .failure(let error):
-                result(.failure(error))
-            }
-        }
+    func getCategories() -> AnyPublisher<[CategoryModel], Error> {
+        return self.locale.getCategories()
+        .map { CategoryMapper.mapCategoryEntitiesToDomains(input: $0) }
+        .eraseToAnyPublisher()
     }
     
     func getCategory(

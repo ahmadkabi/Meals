@@ -1,13 +1,11 @@
 import Foundation
+import Combine
 import RealmSwift
 
 protocol LocaleDataSourceProtocol: AnyObject {
     
-    func getCategories(result: @escaping (Result<[CategoryEntity], DatabaseError>) -> Void)
-    func addCategory(
-        from category: CategoryEntity,
-        result: @escaping (Result<Bool, DatabaseError>) -> Void
-    )
+    func getCategories() -> AnyPublisher<[CategoryEntity], Error>
+    func addCategory(from category: CategoryEntity) -> AnyPublisher<Bool, Error>
     
 }
 
@@ -27,19 +25,19 @@ final class LocaleDataSource: NSObject {
 
 extension LocaleDataSource: LocaleDataSourceProtocol {
     
-    func getCategories(
-        result: @escaping (Result<[CategoryEntity], DatabaseError>) -> Void
-    ) {
-        if let realm = realm {
+    func getCategories() -> AnyPublisher<[CategoryEntity], Error> {
+        return Future<[CategoryEntity], Error> { completion in
+          if let realm = self.realm {
             let categories: Results<CategoryEntity> = {
-                realm.objects(CategoryEntity.self)
-                    .sorted(byKeyPath: "title", ascending: true)
+              realm.objects(CategoryEntity.self)
+                .sorted(byKeyPath: "title", ascending: true)
             }()
-            result(.success(categories.toArray(ofType: CategoryEntity.self)))
-        } else {
-            result(.failure(.invalidInstance))
-        }
-    }
+            completion(.success(categories.toArray(ofType: CategoryEntity.self)))
+          } else {
+            completion(.failure(DatabaseError.invalidInstance))
+          }
+        }.eraseToAnyPublisher()
+      }
     
     func getCategory(
         id: String,
@@ -52,21 +50,22 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
     }
     
     func addCategory(
-        from category: CategoryEntity,
-        result: @escaping (Result<Bool, DatabaseError>) -> Void
-    ) {
-        if let realm = realm {
-            do {
-                try realm.write {
-                    realm.add(category, update: .all)
-                    result(.success(true))
+        from category: CategoryEntity
+    ) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error> { completion in
+            if let realm = self.realm {
+                do {
+                    try realm.write {
+                        realm.add(category, update: .all)
+                        completion(.success(true))
+                    }
+                } catch {
+                    completion(.failure(DatabaseError.requestFailed))
                 }
-            } catch {
-                result(.failure(.requestFailed))
+            } else {
+                completion(.failure(DatabaseError.invalidInstance))
             }
-        } else {
-            result(.failure(.invalidInstance))
-        }
+        }.eraseToAnyPublisher()
     }
     
     func deleteCategory(
@@ -77,7 +76,7 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
             result(.failure(.invalidInstance))
             return
         }
-
+        
         guard let category = realm.object(
             ofType: CategoryEntity.self,
             forPrimaryKey: id
@@ -85,12 +84,12 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
             result(.success(false))
             return
         }
-
+        
         do {
             try realm.write {
                 realm.delete(category)
             }
-
+            
             result(.success(true))
         } catch {
             result(.failure(.requestFailed))

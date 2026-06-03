@@ -1,12 +1,12 @@
 import Foundation
+import Combine
 
 protocol FavoriteUseCase {
     
-    func getFavorites(completion: @escaping (Result<[CategoryModel], Error>) -> Void)
+    func getFavorites() -> AnyPublisher<[CategoryModel], Error>
     func favoriteCategory(
-        categoryEntity: CategoryEntity,
-        completion: @escaping (Result<Bool, DatabaseError>) -> Void
-    )
+        categoryEntity: CategoryEntity
+    ) -> AnyPublisher<Bool, Error> 
     
 }
 
@@ -18,21 +18,12 @@ class FavoriteInteractor: FavoriteUseCase {
         self.repository = repository
     }
     
-    func getFavorites(
-        completion: @escaping (Result<[CategoryModel], Error>) -> Void
-    ) {
-        repository.getCategories { result in
-            completion(result)
-        }
+    func getFavorites() -> AnyPublisher<[CategoryModel], Error> {
+        return repository.getCategories()
     }
     
-    func favoriteCategory(
-        categoryEntity: CategoryEntity,
-        completion: @escaping (Result<Bool, DatabaseError>) -> Void
-    ) {
-        repository.favoriteCategory(categoryEntity: categoryEntity) { result in
-            completion(result)
-        }
+    func favoriteCategory(categoryEntity: CategoryEntity) -> AnyPublisher<Bool, Error> {
+        return repository.favoriteCategory(categoryEntity: categoryEntity)
     }
     
     

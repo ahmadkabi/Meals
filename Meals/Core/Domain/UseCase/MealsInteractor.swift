@@ -1,25 +1,25 @@
 import Foundation
+import Combine
 
 protocol MealsUseCase {
-
-  func fetchCategories(completion: @escaping (Result<[CategoryModel], Error>) -> Void)
-
+    
+    func fetchCategories() -> AnyPublisher<[CategoryModel], Error>
+    
 }
 
 class MealsInteractor: MealsUseCase {
-
-  private let repository: MealRepositoryProtocol
-
-  required init(repository: MealRepositoryProtocol) {
-    self.repository = repository
-  }
-
-  func fetchCategories(
-    completion: @escaping (Result<[CategoryModel], Error>) -> Void
-  ) {
-    repository.fetchCategories { result in
-      completion(result)
+    
+    private let repository: MealRepositoryProtocol
+    
+    required init(repository: MealRepositoryProtocol) {
+        self.repository = repository
     }
-  }
-
+    
+    func fetchCategories() -> AnyPublisher<[CategoryModel], Error> {
+        return repository.fetchCategories()
+    }
+    
+    
+    
+    
 }
