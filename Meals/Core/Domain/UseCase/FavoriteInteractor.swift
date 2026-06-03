@@ -2,9 +2,7 @@ import Foundation
 
 protocol FavoriteUseCase {
     
-    //    todo : delete
-    func getCategories(completion: @escaping (Result<[CategoryModel], Error>) -> Void)
-    
+    func getFavorites(completion: @escaping (Result<[CategoryModel], Error>) -> Void)
     func favoriteCategory(
         categoryEntity: CategoryEntity,
         completion: @escaping (Result<Bool, DatabaseError>) -> Void
@@ -20,7 +18,7 @@ class FavoriteInteractor: FavoriteUseCase {
         self.repository = repository
     }
     
-    func getCategories(
+    func getFavorites(
         completion: @escaping (Result<[CategoryModel], Error>) -> Void
     ) {
         repository.getCategories { result in

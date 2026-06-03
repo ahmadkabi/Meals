@@ -6,8 +6,6 @@ protocol MealRepositoryProtocol {
     func getCategory(id: String) -> CategoryModel?
     func favoriteCategory(categoryEntity: CategoryEntity, result: @escaping (Result<Bool, DatabaseError>) -> Void)
     func unfavoriteCategory(categoryEntity: CategoryEntity, result: @escaping (Result<Bool, DatabaseError>) -> Void)
-    
-    //todo : delete
     func getCategories(result: @escaping (Result<[CategoryModel], Error>) -> Void)
     
 }
@@ -47,7 +45,7 @@ extension MealRepository: MealRepositoryProtocol {
     }
     
     func favoriteCategory(categoryEntity: CategoryEntity, result: @escaping (Result<Bool, DatabaseError>) -> Void){
-        locale.addFavorite(from: categoryEntity){ addState in
+        locale.addCategory(from: categoryEntity){ addState in
             switch addState {
             case .success(let resultFromAdd):
                 result(.success(resultFromAdd))
@@ -58,7 +56,7 @@ extension MealRepository: MealRepositoryProtocol {
     }
     
     func unfavoriteCategory(categoryEntity: CategoryEntity, result: @escaping (Result<Bool, DatabaseError>) -> Void){
-        locale.deleteFavorite(id: categoryEntity.id){ addState in
+        locale.deleteCategory(id: categoryEntity.id){ addState in
             switch addState {
             case .success(let resultFromAdd):
                 result(.success(resultFromAdd))

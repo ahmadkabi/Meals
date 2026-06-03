@@ -15,7 +15,7 @@ class FavoritePresenter: ObservableObject {
 
   func getCategories() {
     loadingState = true
-    favoriteUseCase.getCategories { result in
+    favoriteUseCase.getFavorites { result in
       switch result {
       case .success(let categories):
         DispatchQueue.main.async {

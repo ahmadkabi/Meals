@@ -4,7 +4,7 @@ import RealmSwift
 protocol LocaleDataSourceProtocol: AnyObject {
     
     func getCategories(result: @escaping (Result<[CategoryEntity], DatabaseError>) -> Void)
-    func addFavorite(
+    func addCategory(
         from category: CategoryEntity,
         result: @escaping (Result<Bool, DatabaseError>) -> Void
     )
@@ -51,7 +51,7 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
         }
     }
     
-    func addFavorite(
+    func addCategory(
         from category: CategoryEntity,
         result: @escaping (Result<Bool, DatabaseError>) -> Void
     ) {
@@ -69,7 +69,7 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
         }
     }
     
-    func deleteFavorite(
+    func deleteCategory(
         id: String,
         result: @escaping (Result<Bool, DatabaseError>) -> Void
     ) {
