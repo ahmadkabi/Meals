@@ -13,6 +13,8 @@ struct FavoriteView: View {
         }
       } else {
         ScrollView(.vertical, showsIndicators: false) {
+            Text("Favorites")
+                .font(.title)
           ForEach(
             self.presenter.categories,
             id: \.id

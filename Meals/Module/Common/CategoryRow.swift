@@ -31,10 +31,6 @@ extension CategoryRow {
       Text(category.title)
         .font(.title)
         .bold()
-
-      Text(category.description)
-        .font(.system(size: 14))
-        .lineLimit(2)
     }.padding(
       EdgeInsets(
         top: 0,

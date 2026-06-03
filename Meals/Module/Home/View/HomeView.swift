@@ -4,6 +4,7 @@ struct HomeView: View {
     
     @ObservedObject var mealsPresenter: MealsPresenter
     @ObservedObject var favoritePresenter: FavoritePresenter
+    @ObservedObject var aboutPresenter: AboutPresenter
     
     @State private var selectedTab = 0
     
@@ -12,8 +13,8 @@ struct HomeView: View {
             TabView(selection: $selectedTab) {
                 MealsView(presenter: mealsPresenter)
                     .tabItem {
-                        Image(systemName: "house.fill")
-                        Text("Home")
+                        Image(systemName: "fork.knife")
+                        Text("Meals")
                     }
                     .tag(0)
                 
@@ -24,17 +25,14 @@ struct HomeView: View {
                     }
                     .tag(1)
                 
-                AboutView()
+                AboutView(presenter: aboutPresenter)
                     .tabItem {
                         Image(systemName: "person.fill")
                         Text("About")
                     }
                     .tag(2)
             }
-        }.navigationBarTitle(
-            Text("Meals Apps"),
-            displayMode: .automatic
-        )
+        }
     }
     
 }

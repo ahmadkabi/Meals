@@ -23,9 +23,7 @@
 		2A9D455D292C8272008FABEB /* CategoryMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D455C292C8272008FABEB /* CategoryMapper.swift */; };
 		2A9D455F292C828E008FABEB /* CustomeError+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D455E292C828E008FABEB /* CustomeError+Ext.swift */; };
 		2A9D4561292C82A2008FABEB /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D4560292C82A2008FABEB /* Color+Ext.swift */; };
-		2A9D4566292C840B008FABEB /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D4565292C840B008FABEB /* HomePresenter.swift */; };
 		2A9D4568292C84B2008FABEB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D4567292C84B2008FABEB /* HomeView.swift */; };
-		2A9D456C292C8577008FABEB /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D456B292C8577008FABEB /* HomeRouter.swift */; };
 		2A9D4570292C8604008FABEB /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D456F292C8604008FABEB /* DetailPresenter.swift */; };
 		2A9D4572292C8620008FABEB /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D4571292C8620008FABEB /* DetailView.swift */; };
 		2AC96394292CB18A0061B65A /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 2AC96393292CB18A0061B65A /* Realm */; };
@@ -42,6 +40,7 @@
 		F4E5EAD52FCEE141004CC902 /* MealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E5EAD22FCEE141004CC902 /* MealsView.swift */; };
 		F4E5EAD62FCEE141004CC902 /* MealsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E5EAD02FCEE141004CC902 /* MealsRouter.swift */; };
 		F4E5EAD72FCEE141004CC902 /* MealsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E5EACE2FCEE141004CC902 /* MealsPresenter.swift */; };
+		F4E5EADA2FCFA2B9004CC902 /* AboutPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E5EAD82FCFA2B9004CC902 /* AboutPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,9 +60,7 @@
 		2A9D455C292C8272008FABEB /* CategoryMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMapper.swift; sourceTree = "<group>"; };
 		2A9D455E292C828E008FABEB /* CustomeError+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomeError+Ext.swift"; sourceTree = "<group>"; };
 		2A9D4560292C82A2008FABEB /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
-		2A9D4565292C840B008FABEB /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		2A9D4567292C84B2008FABEB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		2A9D456B292C8577008FABEB /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		2A9D456F292C8604008FABEB /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		2A9D4571292C8620008FABEB /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		2AC96398292CB25E0061B65A /* LocaleDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleDataSource.swift; sourceTree = "<group>"; };
@@ -77,6 +74,7 @@
 		F4E5EACE2FCEE141004CC902 /* MealsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsPresenter.swift; sourceTree = "<group>"; };
 		F4E5EAD02FCEE141004CC902 /* MealsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsRouter.swift; sourceTree = "<group>"; };
 		F4E5EAD22FCEE141004CC902 /* MealsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsView.swift; sourceTree = "<group>"; };
+		F4E5EAD82FCFA2B9004CC902 /* AboutPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,8 +164,6 @@
 		2A9D453F292C80FD008FABEB /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				2A9D4562292C83EA008FABEB /* Presenter */,
-				2A9D4564292C83F8008FABEB /* Router */,
 				2A9D4563292C83F2008FABEB /* View */,
 			);
 			path = Home;
@@ -279,28 +275,12 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		2A9D4562292C83EA008FABEB /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				2A9D4565292C840B008FABEB /* HomePresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
 		2A9D4563292C83F2008FABEB /* View */ = {
 			isa = PBXGroup;
 			children = (
 				2A9D4567292C84B2008FABEB /* HomeView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		2A9D4564292C83F8008FABEB /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				2A9D456B292C8577008FABEB /* HomeRouter.swift */,
-			);
-			path = Router;
 			sourceTree = "<group>";
 		};
 		2A9D456D292C85E2008FABEB /* View */ = {
@@ -381,6 +361,7 @@
 		F4921F8E2FCEDF4E00F738DC /* About */ = {
 			isa = PBXGroup;
 			children = (
+				F4E5EAD92FCFA2B9004CC902 /* Presenter */,
 				F4921F8D2FCEDF4E00F738DC /* View */,
 			);
 			path = About;
@@ -426,6 +407,14 @@
 				F4E5EAD32FCEE141004CC902 /* View */,
 			);
 			path = Meals;
+			sourceTree = "<group>";
+		};
+		F4E5EAD92FCFA2B9004CC902 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				F4E5EAD82FCFA2B9004CC902 /* AboutPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -521,15 +510,14 @@
 				2A9D4561292C82A2008FABEB /* Color+Ext.swift in Sources */,
 				F4E5EAD62FCEE141004CC902 /* MealsRouter.swift in Sources */,
 				2A9D4556292C8225008FABEB /* DetailInteractor.swift in Sources */,
-				2A9D456C292C8577008FABEB /* HomeRouter.swift in Sources */,
 				2A9D4554292C8202008FABEB /* MealsInteractor.swift in Sources */,
-				2A9D4566292C840B008FABEB /* HomePresenter.swift in Sources */,
 				2A9D4570292C8604008FABEB /* DetailPresenter.swift in Sources */,
 				F4921F812FCEDDB500F738DC /* FavoritePresenter.swift in Sources */,
 				F4921F802FCEDDB500F738DC /* FavoriteRouter.swift in Sources */,
 				2A9D454E292C81B1008FABEB /* Injection.swift in Sources */,
 				F4921F912FCEDF4E00F738DC /* AboutView.swift in Sources */,
 				2A9D455F292C828E008FABEB /* CustomeError+Ext.swift in Sources */,
+				F4E5EADA2FCFA2B9004CC902 /* AboutPresenter.swift in Sources */,
 				2A9D4551292C81DD008FABEB /* CategoryModel.swift in Sources */,
 				2AC96399292CB25E0061B65A /* LocaleDataSource.swift in Sources */,
 				2AC9639B292CB2770061B65A /* CategoryEntity.swift in Sources */,
