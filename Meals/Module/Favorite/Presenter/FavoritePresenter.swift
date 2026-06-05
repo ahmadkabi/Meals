@@ -16,6 +16,7 @@ class FavoritePresenter: ObservableObject {
         self.favoriteUseCase = favoriteUseCase
     }
     
+    
     func getCategories() {
         loadingState = true
         favoriteUseCase.getFavorites()
