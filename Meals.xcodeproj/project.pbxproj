@@ -97,6 +97,7 @@
 		2A9D4522292C805D008FABEB = {
 			isa = PBXGroup;
 			children = (
+				F4D8AE4D2FD26EE70070739B /* codemagic.yaml */,
 				2A9D452D292C805D008FABEB /* Meals */,
 				2A9D452C292C805D008FABEB /* Products */,
 			);
@@ -113,7 +114,6 @@
 		2A9D452D292C805D008FABEB /* Meals */ = {
 			isa = PBXGroup;
 			children = (
-				F4D8AE4D2FD26EE70070739B /* codemagic.yaml */,
 				2A9D453C292C80E6008FABEB /* App */,
 				2A9D453D292C80EA008FABEB /* Core */,
 				2A9D453E292C80F2008FABEB /* Module */,
