@@ -1,10 +1,12 @@
 import SwiftUI
 import Combine
+import Category
 
 class DetailPresenter: ObservableObject {
     
-    private let detailUseCase: DetailUseCase
     private var cancellables: Set<AnyCancellable> = []
+    
+    private let detailUseCase: DetailUseCase
     
     @Published var isFavorite: Bool = false
     @Published var category: CategoryModel

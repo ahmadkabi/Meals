@@ -1,5 +1,6 @@
 import SwiftUI
 import Combine
+import Category
 
 class MealsPresenter: ObservableObject {
     
@@ -33,12 +34,12 @@ class MealsPresenter: ObservableObject {
             .store(in: &cancellables)
     }
     
-    func linkBuilder<Content: View>(
-        for category: CategoryModel,
-        @ViewBuilder content: () -> Content
-    ) -> some View {
-        NavigationLink(
-            destination: router.makeDetailView(for: category)) { content() }
-    }
-    
+//    func linkBuilder<Content: View>(
+//        for category: CategoryDomainModel,
+//        @ViewBuilder content: () -> Content
+//    ) -> some View {
+//        NavigationLink(
+//            destination: router.makeDetailView(for: category)) { content() }
+//    }
+//    
 }

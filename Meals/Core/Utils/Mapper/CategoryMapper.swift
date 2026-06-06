@@ -1,4 +1,5 @@
 import Foundation
+import Category
 
 final class CategoryMapper {
     

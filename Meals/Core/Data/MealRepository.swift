@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import Category
 
 protocol MealRepositoryProtocol {
     
@@ -7,7 +8,7 @@ protocol MealRepositoryProtocol {
     func getCategory(id: String) -> CategoryModel?
     func favoriteCategory(categoryEntity: CategoryEntity) -> AnyPublisher<Bool, Error>
     func unfavoriteCategory(id: String) -> AnyPublisher<Bool, Error>
-    func getCategories() -> AnyPublisher<[CategoryModel], Error>
+    func getFavorites() -> AnyPublisher<[CategoryModel], Error>
     
 }
 
@@ -32,7 +33,7 @@ final class MealRepository: NSObject {
 extension MealRepository: MealRepositoryProtocol {
     
     func fetchCategories() -> AnyPublisher<[CategoryModel], Error> {
-        return self.remote.getCategories()
+        return self.remote.fetchCategories()
             .map { CategoryMapper.mapCategoryResponsesToDomains(input: $0) }
             .eraseToAnyPublisher()
     }
@@ -49,7 +50,7 @@ extension MealRepository: MealRepositoryProtocol {
         .eraseToAnyPublisher()
     }
     
-    func getCategories() -> AnyPublisher<[CategoryModel], Error> {
+    func getFavorites() -> AnyPublisher<[CategoryModel], Error> {
         return self.locale.getCategories()
         .map { CategoryMapper.mapCategoryEntitiesToDomains(input: $0) }
         .eraseToAnyPublisher()

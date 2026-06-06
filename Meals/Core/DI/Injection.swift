@@ -1,4 +1,6 @@
 import Foundation
+import Core
+import Category
 import RealmSwift
 
 final class Injection: NSObject {
@@ -25,6 +27,19 @@ final class Injection: NSObject {
     func provideDetail(category: CategoryModel) -> DetailUseCase {
         let repository = provideRepository()
         return DetailInteractor(repository: repository, category: category)
+    }
+    
+    private let realm = try? Realm()
+    
+    func provideCategory<U: UseCase>() -> U where U.Request == Any, U.Response == [CategoryModel] {
+        let locale = GetCategoriesLocaleDataSource(realm: realm!)
+        let remote = GetCategoriesRemoteDataSource(endpoint: Endpoints.Gets.categories.url)
+        let mapper = CategoryTransformer()
+        let repository = GetCategoriesRepository(
+            localeDataSource: locale,
+            remoteDataSource: remote,
+            mapper: mapper)
+        return Interactor(repository: repository) as! U
     }
     
 }

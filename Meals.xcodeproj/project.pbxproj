@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,7 +16,6 @@
 		2A9D454A292C817B008FABEB /* RemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D4549292C817B008FABEB /* RemoteDataSource.swift */; };
 		2A9D454C292C819A008FABEB /* MealRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D454B292C819A008FABEB /* MealRepository.swift */; };
 		2A9D454E292C81B1008FABEB /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D454D292C81B1008FABEB /* Injection.swift */; };
-		2A9D4551292C81DD008FABEB /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D4550292C81DD008FABEB /* CategoryModel.swift */; };
 		2A9D4554292C8202008FABEB /* MealsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D4553292C8202008FABEB /* MealsInteractor.swift */; };
 		2A9D4556292C8225008FABEB /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D4555292C8225008FABEB /* DetailInteractor.swift */; };
 		2A9D455B292C8262008FABEB /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9D455A292C8262008FABEB /* APICall.swift */; };
@@ -37,6 +36,8 @@
 		F4921F872FCEDF0700F738DC /* FavoriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4921F862FCEDF0700F738DC /* FavoriteInteractor.swift */; };
 		F4921F912FCEDF4E00F738DC /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4921F8C2FCEDF4E00F738DC /* AboutView.swift */; };
 		F4D8AE4E2FD26EE70070739B /* codemagic.yaml in Resources */ = {isa = PBXBuildFile; fileRef = F4D8AE4D2FD26EE70070739B /* codemagic.yaml */; };
+		F4D8AE512FD2AAE30070739B /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = F4D8AE502FD2AAE30070739B /* Core */; };
+		F4D8AE542FD2B7430070739B /* Category in Frameworks */ = {isa = PBXBuildFile; productRef = F4D8AE532FD2B7430070739B /* Category */; };
 		F4E5EACD2FCEE115004CC902 /* CategoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E5EACB2FCEE115004CC902 /* CategoryRow.swift */; };
 		F4E5EAD52FCEE141004CC902 /* MealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E5EAD22FCEE141004CC902 /* MealsView.swift */; };
 		F4E5EAD62FCEE141004CC902 /* MealsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E5EAD02FCEE141004CC902 /* MealsRouter.swift */; };
@@ -54,7 +55,6 @@
 		2A9D4549292C817B008FABEB /* RemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSource.swift; sourceTree = "<group>"; };
 		2A9D454B292C819A008FABEB /* MealRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRepository.swift; sourceTree = "<group>"; };
 		2A9D454D292C81B1008FABEB /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
-		2A9D4550292C81DD008FABEB /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		2A9D4553292C8202008FABEB /* MealsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsInteractor.swift; sourceTree = "<group>"; };
 		2A9D4555292C8225008FABEB /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
 		2A9D455A292C8262008FABEB /* APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
@@ -86,7 +86,9 @@
 			files = (
 				2AC96396292CB18A0061B65A /* RealmSwift in Frameworks */,
 				2AC9639F292CB8270061B65A /* CachedAsyncImage in Frameworks */,
+				F4D8AE542FD2B7430070739B /* Category in Frameworks */,
 				2AC96394292CB18A0061B65A /* Realm in Frameworks */,
+				F4D8AE512FD2AAE30070739B /* Core in Frameworks */,
 				2A9276B0292CAA7B00C30767 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,7 +204,6 @@
 		2A9D4543292C8129008FABEB /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				2A9D454F292C81C2008FABEB /* Model */,
 				2A9D4552292C81E5008FABEB /* UseCase */,
 			);
 			path = Domain;
@@ -233,14 +234,6 @@
 				2A9D4547292C8162008FABEB /* CategoriesResponse.swift */,
 			);
 			path = Response;
-			sourceTree = "<group>";
-		};
-		2A9D454F292C81C2008FABEB /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2A9D4550292C81DD008FABEB /* CategoryModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		2A9D4552292C81E5008FABEB /* UseCase */ = {
@@ -441,6 +434,8 @@
 				2AC96393292CB18A0061B65A /* Realm */,
 				2AC96395292CB18A0061B65A /* RealmSwift */,
 				2AC9639E292CB8270061B65A /* CachedAsyncImage */,
+				F4D8AE502FD2AAE30070739B /* Core */,
+				F4D8AE532FD2B7430070739B /* Category */,
 			);
 			productName = TheMealsApp;
 			productReference = 2A9D452B292C805D008FABEB /* Meals.app */;
@@ -474,6 +469,8 @@
 				2A9276AE292CAA7B00C30767 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				2AC96392292CB18A0061B65A /* XCRemoteSwiftPackageReference "realm-swift" */,
 				2AC9639D292CB8270061B65A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
+				F4D8AE4F2FD2AAE30070739B /* XCLocalSwiftPackageReference "../Module/Core" */,
+				F4D8AE522FD2B7430070739B /* XCLocalSwiftPackageReference "../Module/Category" */,
 			);
 			productRefGroup = 2A9D452C292C805D008FABEB /* Products */;
 			projectDirPath = "";
@@ -522,7 +519,6 @@
 				F4921F912FCEDF4E00F738DC /* AboutView.swift in Sources */,
 				2A9D455F292C828E008FABEB /* CustomeError+Ext.swift in Sources */,
 				F4E5EADA2FCFA2B9004CC902 /* AboutPresenter.swift in Sources */,
-				2A9D4551292C81DD008FABEB /* CategoryModel.swift in Sources */,
 				2AC96399292CB25E0061B65A /* LocaleDataSource.swift in Sources */,
 				2AC9639B292CB2770061B65A /* CategoryEntity.swift in Sources */,
 				2A9D455D292C8272008FABEB /* CategoryMapper.swift in Sources */,
@@ -737,6 +733,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		F4D8AE4F2FD2AAE30070739B /* XCLocalSwiftPackageReference "../Module/Core" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Module/Core;
+		};
+		F4D8AE522FD2B7430070739B /* XCLocalSwiftPackageReference "../Module/Category" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Module/Category;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		2A9276AE292CAA7B00C30767 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -784,6 +791,14 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2AC9639D292CB8270061B65A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
 			productName = CachedAsyncImage;
+		};
+		F4D8AE502FD2AAE30070739B /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Core;
+		};
+		F4D8AE532FD2B7430070739B /* Category */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Category;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

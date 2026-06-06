@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import Category
 
 protocol FavoriteUseCase {
     
@@ -19,7 +20,7 @@ class FavoriteInteractor: FavoriteUseCase {
     }
     
     func getFavorites() -> AnyPublisher<[CategoryModel], Error> {
-        return repository.getCategories()
+        return repository.getFavorites()
     }
     
     func favoriteCategory(categoryEntity: CategoryEntity) -> AnyPublisher<Bool, Error> {

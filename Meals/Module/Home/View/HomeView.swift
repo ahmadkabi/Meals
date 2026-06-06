@@ -1,8 +1,10 @@
 import SwiftUI
+import Core
+import Category
 
 struct HomeView: View {
     
-    @ObservedObject var mealsPresenter: MealsPresenter
+    @ObservedObject var mealsPresenter: GetListPresenter<Any, CategoryModel, Interactor<Any, [CategoryModel], GetCategoriesRepository<GetCategoriesLocaleDataSource, GetCategoriesRemoteDataSource, CategoryTransformer>>>
     @ObservedObject var favoritePresenter: FavoritePresenter
     @ObservedObject var aboutPresenter: AboutPresenter
     

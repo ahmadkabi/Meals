@@ -4,7 +4,7 @@ import Alamofire
 
 protocol RemoteDataSourceProtocol: AnyObject {
     
-    func getCategories() -> AnyPublisher<[CategoryResponse], Error>
+    func fetchCategories() -> AnyPublisher<[CategoryResponse], Error>
     
 }
 final class RemoteDataSource: NSObject {
@@ -17,7 +17,7 @@ final class RemoteDataSource: NSObject {
 
 extension RemoteDataSource: RemoteDataSourceProtocol {
     
-    func getCategories() -> AnyPublisher<[CategoryResponse], Error> {
+    func fetchCategories() -> AnyPublisher<[CategoryResponse], Error> {
         return Future<[CategoryResponse], Error> { completion in
           if let url = URL(string: Endpoints.Gets.categories.url) {
             AF.request(url)

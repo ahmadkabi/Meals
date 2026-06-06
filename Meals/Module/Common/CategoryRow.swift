@@ -1,9 +1,10 @@
 import SwiftUI
 import CachedAsyncImage
+import Category
 
 struct CategoryRow: View {
 
-  var category: CategoryModel
+    var category: CategoryModel
   var body: some View {
     VStack {
       imageCategory

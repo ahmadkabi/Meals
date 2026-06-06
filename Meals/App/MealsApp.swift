@@ -1,17 +1,28 @@
 import SwiftUI
+import Core
+import Category
+
+let categoryUseCase: Interactor<
+    Any,
+    [CategoryModel],
+    GetCategoriesRepository<
+        GetCategoriesLocaleDataSource,
+        GetCategoriesRemoteDataSource,
+        CategoryTransformer>
+> = Injection.init().provideCategory()
 
 @main
 struct MealsApp: App {
-  let mealsPresenter = MealsPresenter(mealsUseCase: Injection.init().provideMeals())
-  let favoritePresenter = FavoritePresenter(favoriteUseCase: Injection.init().provideFavorite())
-  let aboutPresenter = AboutPresenter()
-
-  var body: some Scene {
-    WindowGroup {
-      ContentView()
-        .environmentObject(mealsPresenter)
-        .environmentObject(favoritePresenter)
-        .environmentObject(aboutPresenter)
+    let mealsPresenter = GetListPresenter(useCase: categoryUseCase)
+    let favoritePresenter = FavoritePresenter(favoriteUseCase: Injection.init().provideFavorite())
+    let aboutPresenter = AboutPresenter()
+    
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+                .environmentObject(mealsPresenter)
+                .environmentObject(favoritePresenter)
+                .environmentObject(aboutPresenter)
+        }
     }
-  }
 }

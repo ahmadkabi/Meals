@@ -27,6 +27,7 @@ final class LocaleDataSource: NSObject {
 
 extension LocaleDataSource: LocaleDataSourceProtocol {
     
+    //
     func getCategories() -> AnyPublisher<[CategoryEntity], Error> {
         return Future<[CategoryEntity], Error> { completion in
             if let realm = self.realm {
@@ -41,6 +42,7 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
         }.eraseToAnyPublisher()
     }
     
+    //
     func getCategory(
         id: String,
     ) -> CategoryEntity? {
@@ -51,6 +53,7 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
         }
     }
     
+    //
     func addCategory(
         from category: CategoryEntity
     ) -> AnyPublisher<Bool, Error> {
@@ -70,7 +73,7 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
         }.eraseToAnyPublisher()
     }
     
-    
+    //
     func deleteCategory(
         id: String
     ) -> AnyPublisher<Bool, Error> {
