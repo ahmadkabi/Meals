@@ -9,14 +9,8 @@ final class Injection: NSObject {
         let realm = try? Realm()
         
         let locale: LocaleDataSource = LocaleDataSource.sharedInstance(realm)
-        let remote: RemoteDataSource = RemoteDataSource.sharedInstance
         
-        return MealRepository.sharedInstance(locale, remote)
-    }
-    
-    func provideMeals() -> MealsUseCase {
-        let repository = provideRepository()
-        return MealsInteractor(repository: repository)
+        return MealRepository.sharedInstance(locale)
     }
     
     func provideFavorite() -> FavoriteUseCase {

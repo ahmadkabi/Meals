@@ -1,9 +1,7 @@
 import Foundation
 
 struct CategoriesResponse: Decodable {
-
   let categories: [CategoryResponse]
-
 }
 
 struct CategoryResponse: Decodable {
@@ -21,3 +19,4 @@ struct CategoryResponse: Decodable {
   let description: String?
 
 }
+ 

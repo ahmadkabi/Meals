@@ -4,7 +4,6 @@ import Category
 
 protocol FavoriteUseCase {
     
-    func getFavorites() -> AnyPublisher<[CategoryModel], Error>
     func favoriteCategory(
         categoryEntity: CategoryEntity
     ) -> AnyPublisher<Bool, Error> 
@@ -17,10 +16,6 @@ class FavoriteInteractor: FavoriteUseCase {
     
     required init(repository: MealRepositoryProtocol) {
         self.repository = repository
-    }
-    
-    func getFavorites() -> AnyPublisher<[CategoryModel], Error> {
-        return repository.getFavorites()
     }
     
     func favoriteCategory(categoryEntity: CategoryEntity) -> AnyPublisher<Bool, Error> {

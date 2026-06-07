@@ -4,39 +4,29 @@ import Category
 
 protocol MealRepositoryProtocol {
     
-    func fetchCategories() -> AnyPublisher<[CategoryModel], Error>
     func getCategory(id: String) -> CategoryModel?
     func favoriteCategory(categoryEntity: CategoryEntity) -> AnyPublisher<Bool, Error>
     func unfavoriteCategory(id: String) -> AnyPublisher<Bool, Error>
-    func getFavorites() -> AnyPublisher<[CategoryModel], Error>
     
 }
 
 final class MealRepository: NSObject {
     
-    typealias MealInstance = (LocaleDataSource, RemoteDataSource) -> MealRepository
+    typealias MealInstance = (LocaleDataSource) -> MealRepository
     
-    fileprivate let remote: RemoteDataSource
     fileprivate let locale: LocaleDataSource
     
-    private init(locale: LocaleDataSource, remote: RemoteDataSource) {
+    private init(locale: LocaleDataSource) {
         self.locale = locale
-        self.remote = remote
     }
     
-    static let sharedInstance: MealInstance = { localeRepo, remoteRepo in
-        return MealRepository(locale: localeRepo, remote: remoteRepo)
+    static let sharedInstance: MealInstance = { localeRepo in
+        return MealRepository(locale: localeRepo)
     }
     
 }
 
 extension MealRepository: MealRepositoryProtocol {
-    
-    func fetchCategories() -> AnyPublisher<[CategoryModel], Error> {
-        return self.remote.fetchCategories()
-            .map { CategoryMapper.mapCategoryResponsesToDomains(input: $0) }
-            .eraseToAnyPublisher()
-    }
     
     func favoriteCategory(categoryEntity: CategoryEntity) -> AnyPublisher<Bool, Error>{
         return self.locale.addCategory(from: categoryEntity)
@@ -47,12 +37,6 @@ extension MealRepository: MealRepositoryProtocol {
     func unfavoriteCategory(id: String) -> AnyPublisher<Bool, Error>{
         return self.locale.deleteCategory(id: id)
         .map { $0 }
-        .eraseToAnyPublisher()
-    }
-    
-    func getFavorites() -> AnyPublisher<[CategoryModel], Error> {
-        return self.locale.getCategories()
-        .map { CategoryMapper.mapCategoryEntitiesToDomains(input: $0) }
         .eraseToAnyPublisher()
     }
     
