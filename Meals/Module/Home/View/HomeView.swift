@@ -4,8 +4,8 @@ import Category
 
 struct HomeView: View {
     
-    @ObservedObject var mealsPresenter: GetListPresenter<Any, CategoryModel, Interactor<Any, [CategoryModel], GetCategoriesRepository<GetCategoriesLocaleDataSource, GetCategoriesRemoteDataSource, CategoryTransformer>>>
-    @ObservedObject var favoritePresenter: FavoritePresenter
+    @ObservedObject var categoriesPresenter: GetListPresenter<Any, CategoryModel, Interactor<Any, [CategoryModel], FetchCategoriesRepository<GetCategoriesRemoteDataSource, CategoryTransformer>>>
+    @ObservedObject var favoritePresenter: GetListPresenter<Any, CategoryModel, Interactor<Any, [CategoryModel], GetCategoriesRepository<GetCategoriesLocaleDataSource, CategoryTransformer>>>
     @ObservedObject var aboutPresenter: AboutPresenter
     
     @State private var selectedTab = 0
@@ -13,7 +13,7 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             TabView(selection: $selectedTab) {
-                MealsView(presenter: mealsPresenter)
+                CategoriesView(presenter: categoriesPresenter)
                     .tabItem {
                         Image(systemName: "fork.knife")
                         Text("Meals")

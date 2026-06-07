@@ -31,14 +31,23 @@ final class Injection: NSObject {
     
     private let realm = try? Realm()
     
-    func provideCategory<U: UseCase>() -> U where U.Request == Any, U.Response == [CategoryModel] {
-        let locale = GetCategoriesLocaleDataSource(realm: realm!)
+    func provideFetchCategoriesInteractor<U: UseCase>() -> U where U.Request == Any, U.Response == [CategoryModel] {
         let remote = GetCategoriesRemoteDataSource(endpoint: Endpoints.Gets.categories.url)
+        let mapper = CategoryTransformer()
+        let repository = FetchCategoriesRepository(
+            remoteDataSource: remote,
+            mapper: mapper
+        )
+        return Interactor(repository: repository) as! U
+    }
+    
+    func provideGetCategoriesInteractor<U: UseCase>() -> U where U.Request == Any, U.Response == [CategoryModel] {
+        let locale = GetCategoriesLocaleDataSource(realm: realm!)
         let mapper = CategoryTransformer()
         let repository = GetCategoriesRepository(
             localeDataSource: locale,
-            remoteDataSource: remote,
-            mapper: mapper)
+            mapper: mapper
+        )
         return Interactor(repository: repository) as! U
     }
     

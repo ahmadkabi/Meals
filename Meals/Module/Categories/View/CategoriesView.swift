@@ -2,9 +2,9 @@ import SwiftUI
 import Core
 import Category
 
-struct MealsView: View {
+struct CategoriesView: View {
     
-    @ObservedObject var presenter: GetListPresenter<Any, CategoryModel, Interactor<Any, [CategoryModel], GetCategoriesRepository<GetCategoriesLocaleDataSource, GetCategoriesRemoteDataSource, CategoryTransformer>>>
+    @ObservedObject var presenter: GetListPresenter<Any, CategoryModel, Interactor<Any, [CategoryModel], FetchCategoriesRepository<GetCategoriesRemoteDataSource, CategoryTransformer>>>
     
     var body: some View {
         ZStack {
@@ -30,8 +30,6 @@ struct MealsView: View {
         }.onAppear {
             if self.presenter.list.count == 0 {
                 self.presenter.getList(request: nil)
-                //todo last here compare getlist & fetchCategories
-                //                self.presenter.fetchCategories()
             }
         }.navigationBarTitle(
             Text("Meals Apps"),
@@ -45,7 +43,7 @@ struct MealsView: View {
     ) -> some View {
 
       NavigationLink(
-        destination: MealsRouter().makeDetailView(for: category)
+        destination: CategoriesRouter().makeDetailView(for: category)
       ) { content() }
     }
     

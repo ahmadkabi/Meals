@@ -3,14 +3,14 @@ import Core
 import Category
 
 struct ContentView: View {
-    @EnvironmentObject var mealsPresenter: GetListPresenter<Any, CategoryModel, Interactor<Any, [CategoryModel], GetCategoriesRepository<GetCategoriesLocaleDataSource, GetCategoriesRemoteDataSource, CategoryTransformer>>>
-    @EnvironmentObject var favoritePresenter: FavoritePresenter
+    @EnvironmentObject var mealsPresenter: GetListPresenter<Any, CategoryModel, Interactor<Any, [CategoryModel], FetchCategoriesRepository<GetCategoriesRemoteDataSource, CategoryTransformer>>>
+    @EnvironmentObject var favoritePresenter: GetListPresenter<Any, CategoryModel, Interactor<Any, [CategoryModel], GetCategoriesRepository<GetCategoriesLocaleDataSource, CategoryTransformer>>>
     @EnvironmentObject var aboutPresenter: AboutPresenter
     
     var body: some View {
         NavigationStack {
             HomeView(
-                mealsPresenter: mealsPresenter,
+                categoriesPresenter: mealsPresenter,
                 favoritePresenter: favoritePresenter,
                 aboutPresenter: aboutPresenter,
             )

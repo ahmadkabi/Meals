@@ -1,7 +1,7 @@
 import SwiftUI
 import Category
 
-class MealsRouter {
+class CategoriesRouter {
 
   func makeDetailView(for category: CategoryModel) -> some View {
     let detailUseCase = Injection.init().provideDetail(category: category)

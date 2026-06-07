@@ -1,14 +1,14 @@
 import Foundation
 import Combine
 import RealmSwift
+import Category
 
+//todo : delete
 protocol LocaleDataSourceProtocol: AnyObject {
-    
     func getCategories() -> AnyPublisher<[CategoryEntity], Error>
     func getCategory(id: String) -> CategoryEntity?
     func addCategory(from category: CategoryEntity) -> AnyPublisher<Bool, Error>
     func deleteCategory(id: String) -> AnyPublisher<Bool, Error>
-    
 }
 
 final class LocaleDataSource: NSObject {
