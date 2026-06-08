@@ -7,7 +7,7 @@ let fetchCategoriesUseCase: Interactor<
     [CategoryModel],
     FetchCategoriesRepository<
         GetCategoriesRemoteDataSource,
-        CategoryTransformer>
+        CategoriesTransformer>
 > = Injection.init().provideFetchCategoriesInteractor()
 
 let getCategoriesUseCase: Interactor<
@@ -15,7 +15,7 @@ let getCategoriesUseCase: Interactor<
     [CategoryModel],
     GetCategoriesRepository<
         GetCategoriesLocaleDataSource,
-        CategoryTransformer>
+        CategoriesTransformer>
 > = Injection.init().provideGetCategoriesInteractor()
 
 @main

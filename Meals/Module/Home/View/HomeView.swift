@@ -4,8 +4,8 @@ import Category
 
 struct HomeView: View {
     
-    @ObservedObject var categoriesPresenter: GetListPresenter<Any, CategoryModel, Interactor<Any, [CategoryModel], FetchCategoriesRepository<GetCategoriesRemoteDataSource, CategoryTransformer>>>
-    @ObservedObject var favoritePresenter: GetListPresenter<Any, CategoryModel, Interactor<Any, [CategoryModel], GetCategoriesRepository<GetCategoriesLocaleDataSource, CategoryTransformer>>>
+    @ObservedObject var categoriesPresenter: GetListPresenter<Any, CategoryModel, Interactor<Any, [CategoryModel], FetchCategoriesRepository<GetCategoriesRemoteDataSource, CategoriesTransformer>>>
+    @ObservedObject var favoritePresenter: GetListPresenter<Any, CategoryModel, Interactor<Any, [CategoryModel], GetCategoriesRepository<GetCategoriesLocaleDataSource, CategoriesTransformer>>>
     @ObservedObject var aboutPresenter: AboutPresenter
     
     @State private var selectedTab = 0

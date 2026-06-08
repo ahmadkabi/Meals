@@ -5,29 +5,12 @@ import RealmSwift
 
 final class Injection: NSObject {
     
-    private func provideRepository() -> MealRepositoryProtocol {
-        let realm = try? Realm()
-        
-        let locale: LocaleDataSource = LocaleDataSource.sharedInstance(realm)
-        
-        return MealRepository.sharedInstance(locale)
-    }
-    
-    func provideFavorite() -> FavoriteUseCase {
-        let repository = provideRepository()
-        return FavoriteInteractor(repository: repository)
-    }
-    
-    func provideDetail(category: CategoryModel) -> DetailUseCase {
-        let repository = provideRepository()
-        return DetailInteractor(repository: repository, category: category)
-    }
-    
     private let realm = try? Realm()
     
+     
     func provideFetchCategoriesInteractor<U: UseCase>() -> U where U.Request == Any, U.Response == [CategoryModel] {
         let remote = GetCategoriesRemoteDataSource(endpoint: Endpoints.Gets.categories.url)
-        let mapper = CategoryTransformer()
+        let mapper = CategoriesTransformer()
         let repository = FetchCategoriesRepository(
             remoteDataSource: remote,
             mapper: mapper
@@ -37,10 +20,36 @@ final class Injection: NSObject {
     
     func provideGetCategoriesInteractor<U: UseCase>() -> U where U.Request == Any, U.Response == [CategoryModel] {
         let locale = GetCategoriesLocaleDataSource(realm: realm!)
-        let mapper = CategoryTransformer()
+        let mapper = CategoriesTransformer()
         let repository = GetCategoriesRepository(
             localeDataSource: locale,
             mapper: mapper
+        )
+        return Interactor(repository: repository) as! U
+    }
+    
+    func provideGetIsFavoriteInteractor<U: UseCase>() -> U where U.Request == String, U.Response == Bool {
+        let locale = IsFavoriteDataSource(realm: realm!)
+        let repository = GetIsFavoriteRepository(
+            localeDataSource: locale,
+        )
+        return Interactor(repository: repository) as! U
+    }
+    
+    func provideFavoriteCategoryInteractor<U: UseCase>() -> U where U.Request == CategoryModel, U.Response == Bool {
+        let locale = FavoriteCategoryDataSource(realm: realm!)
+        let mapper = CategoryTransformer()
+        let repository = FavoriteCategoryRepository(
+            localeDataSource: locale,
+            mapper: mapper
+        )
+        return Interactor(repository: repository) as! U
+    }
+    
+    func provideUnfavoriteCategoryInteractor<U: UseCase>() -> U where U.Request == String, U.Response == Bool {
+        let locale = UnfavoriteCategoryDataSource(realm: realm!)
+        let repository = UnfavoriteCategoryRepository(
+            localeDataSource: locale,
         )
         return Interactor(repository: repository) as! U
     }

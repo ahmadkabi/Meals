@@ -1,12 +1,19 @@
 import SwiftUI
 import CachedAsyncImage
+import Category
+import Core
 
 struct DetailView: View {
-    @ObservedObject var presenter: DetailPresenter
+    
+    @ObservedObject var presenter: CategoryDetailPresenter<
+        Interactor<String, Bool, GetIsFavoriteRepository<IsFavoriteDataSource>>,
+        Interactor<CategoryModel, Bool, FavoriteCategoryRepository<FavoriteCategoryDataSource, CategoryTransformer>>,
+        Interactor<String, Bool, UnfavoriteCategoryRepository<UnfavoriteCategoryDataSource>>
+    >
     
     var body: some View {
         ZStack {
-            if presenter.loadingState {
+            if presenter.isLoading {
                 loadingIndicator
             } else {
                 ScrollView(.vertical) {
@@ -23,7 +30,7 @@ struct DetailView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    presenter.onFavoriteClicked()
+                    presenter.favoriteCategory()
                 } label: {
                     Image(systemName: presenter.isFavorite ? "heart.fill" : "heart")
                            .foregroundStyle(presenter.isFavorite ? .red : .primary)
